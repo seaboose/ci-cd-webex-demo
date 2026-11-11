@@ -6,3 +6,6 @@ def multiply(a, b):
 
 def subtract(a, b):
     return a - b
+
+def square (number):
+    return number * number
