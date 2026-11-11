@@ -24,4 +24,21 @@ pipeline {
             }
         }
     }
+
+    post {
+        always {
+            withCredentials([
+                string(credentialsId: 'webex-bot-token',
+                       variable: 'WEBEX_BOT_TOKEN'),
+                string(credentialsId: 'webex-room-id',
+                       variable: 'WEBEX_ROOM_ID')
+            ]) {
+                script {
+                    withEnv(["JENKINS_BUILD_STATUS=${currentBuild.currentResult}"]) {
+                        sh 'python3 notify_webex.py'
+                    }
+                }
+            }
+        }
+    }
 }
